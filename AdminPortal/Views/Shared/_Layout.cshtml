@@ -19,8 +19,9 @@
                 @Html.ActionLink("Salary Management", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="@Url.Action("Index", "Home")"><span class="glyphicon glyphicon-home" style="color:white"></span></a></li>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="@Url.Action("test","adminsite/home")"><span class="glyphicon glyphicon-user"></span> Register new user</a></li>
+                    <li><a href="@Url.Action("Login","Auth")"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                 </ul>
             </div>
         </div>
