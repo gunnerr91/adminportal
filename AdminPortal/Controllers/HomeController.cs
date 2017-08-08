@@ -1,26 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace AdminPortal.Controllers
 {
+    [Authorize]
     [RoutePrefix("")]
     public class HomeController : Controller
     {
         [HttpGet]
         [Route("")]
-        public ActionResult Index()
-        {
-            return View();
-        }
+        public ActionResult Index() => View();
 
         [HttpGet]
         [Route("test-page")]
-        public ActionResult TestPage()
-        {
-            return View();
-        }
+        public ActionResult TestPage() => View();
     }
 }
