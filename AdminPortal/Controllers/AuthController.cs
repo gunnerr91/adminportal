@@ -1,6 +1,8 @@
 ﻿using AdminPortal.Models;
 using AdminPortal.Models.AuthViewModels;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web;
@@ -71,16 +73,12 @@ namespace AdminPortal.Controllers
             {
                 return View(model);
             }
-            
+
             var result = await SignInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberUser, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
                     return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                //case SignInStatus.RequiresVerification:
-                //    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberUser });
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
@@ -111,13 +109,21 @@ namespace AdminPortal.Controllers
             var result = await UserManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
-                await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
+                // await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 return RedirectToAction("Index", "Home");
             }
 
             return View(model);
 
+        }
+
+        [Route("logoff")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult LogOff()
+        {
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            return RedirectToAction("Index", "Home");
         }
 
         public void GetRoleList()
@@ -129,6 +135,14 @@ namespace AdminPortal.Controllers
             ViewBag.RoleList = new SelectList(data, "Value", "Text");
         }
 
+        private IAuthenticationManager AuthenticationManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().Authentication;
+            }
+        }
+
         private ActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))
@@ -136,6 +150,14 @@ namespace AdminPortal.Controllers
                 return Redirect(returnUrl);
             }
             return RedirectToAction("Index", "Home");
+        }
+
+        public int GetUserRole()
+        {
+
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            return user.Role;
+
         }
     }
 }

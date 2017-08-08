@@ -6,6 +6,12 @@
 <h2>Login</h2>
 
 <div class="container">
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            @Html.ValidationSummary()
+        </div>
+    }
     <div class="row">
         <div class="col-xs-offset-3 col-xs-6">
 

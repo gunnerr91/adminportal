@@ -3,7 +3,11 @@
     ViewBag.Title = "Admin Site";
 }
 
-
+<style>
+    .btn-primary {
+        width: 100%;
+    }
+</style>
 <h2>Admin Site</h2>
 <div class="container">
     <div class="row">
@@ -13,9 +17,15 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-6">
-
+    <div class="row text-center">
+        <div class="col-xs-12">
+            @if (Model.Admin)
+            {
+                <a class="btn btn-primary" href="@Url.Action("Register", "Auth")"><span class="glyphicon glyphicon-user"></span> Register new user</a>
+            }
+        </div>
+        <div class="col-xs-12">
+            <a class="btn btn-primary" href="@Url.Action("Register", "Auth")"><span class="glyphicon glyphicon-plus-sign"></span> Add new employee</a>
         </div>
     </div>
 </div>

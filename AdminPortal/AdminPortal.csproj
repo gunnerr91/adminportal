@@ -950,6 +950,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AuthViewModels.cs" />
+    <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -978,6 +979,7 @@
     <Content Include="Views\Auth\Login.cshtml" />
     <Content Include="Views\Home\TestPage.cshtml" />
     <Content Include="Views\Auth\Register.cshtml" />
+    <Content Include="Views\Shared\_LoginPartialNav.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
