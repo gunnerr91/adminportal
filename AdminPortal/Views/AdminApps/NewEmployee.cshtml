@@ -2,7 +2,11 @@
 @{
     ViewBag.Title = "NewEmployee";
 }
-
+<style>
+    .bootstrap-datetimepicker-widget.dropdown-menu{
+        z-index:2000;
+    }
+</style>
 <h2>Add New Employee</h2>
 
 <div class="container">
@@ -37,7 +41,32 @@
                             <label>
                                 Date Joined
                             </label>
-                            @Html.TextBoxFor(m => m.DateJoined, "{0:dd/MM/yyyy}", new { @class = "input-sm form-control" })
+                            @Html.TextBoxFor(m => m.DateJoined, new { @class = "input-sm form-control" })
+                        </div>
+
+                        <div class="form-group">
+                            <label>
+                                Contract End Date
+                            </label>
+                            @Html.TextBoxFor(m => m.ContractEndDate, new { @class = "input-sm form-control" })
+                        </div>
+
+                        <div class="form-group">
+                            <label>
+                                Date of Birth
+                            </label>
+                            @Html.TextBoxFor(m => m.DateOfBirth, new { @class = "input-sm form-control" })
+                        </div>
+
+                        <div class="form-group">
+                            <label>
+                                Employee Name
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-addon">£</span>
+                                @Html.TextBoxFor(m => m.Name, new { @class = "input-sm form-control" })
+                                <span class="input-group-addon">Yearly</span>
+                            </div>
                         </div>
 
                         <input class="btn btn-primary" type="submit" value="Add New Employee" />
@@ -51,6 +80,14 @@
 
 <script type="text/javascript">
     $(function () {
-        $('#DateJoined').datetimepicker();
+        $('#DateJoined').datetimepicker({ format: 'DD/MM/YYYY' });
+        $('#ContractEndDate').datetimepicker({ format: 'DD/MM/YYYY' });
+        $('#DateOfBirth').datetimepicker({ format: 'DD/MM/YYYY' });
+
+        $("#DateJoined").on("dp.change", function (e) {
+            if ($('#ContractEndDate').val() < $('#DateJoined').val()) {
+                $("#ContractEndDate").val($("#DateJoined").val())
+            }
+        });
     });
 </script>
