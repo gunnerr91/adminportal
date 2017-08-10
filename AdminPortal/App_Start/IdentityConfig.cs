@@ -44,7 +44,7 @@ namespace AdminPortal
                 manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
                 manager.MaxFailedAccessAttemptsBeforeLockout = 5;
 
-                
+
                 return manager;
             }
         }
