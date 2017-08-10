@@ -101,6 +101,7 @@ namespace AdminPortal.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(Register model)
         {
+            GetRoleList();
             if (!ModelState.IsValid)
             {
                 return View(model);
