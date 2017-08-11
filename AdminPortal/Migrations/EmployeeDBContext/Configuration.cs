@@ -1,4 +1,4 @@
-namespace AdminPortal.Migrations
+namespace AdminPortal.Migrations.EmployeeDBContext
 {
     using System;
     using System.Data.Entity;
@@ -10,6 +10,7 @@ namespace AdminPortal.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            MigrationsDirectory = @"Migrations\EmployeeDBContext";
         }
 
         protected override void Seed(AdminPortal.Models.AdminAppsViewModels.EmployeeDbContext context)

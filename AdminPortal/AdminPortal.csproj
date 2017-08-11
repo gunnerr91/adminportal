@@ -1017,7 +1017,9 @@
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -1035,7 +1037,16 @@
     <Compile Include="Migrations\201708081840021_Initial.Designer.cs">
       <DependentUpon>201708081840021_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708110031098_Initial2.cs" />
+    <Compile Include="Migrations\201708110031098_Initial2.Designer.cs">
+      <DependentUpon>201708110031098_Initial2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\EmployeeDBContext\201708110046466_InitialDatabaseCreation.cs" />
+    <Compile Include="Migrations\EmployeeDBContext\201708110046466_InitialDatabaseCreation.Designer.cs">
+      <DependentUpon>201708110046466_InitialDatabaseCreation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\EmployeeDBContext\Configuration.cs" />
     <Compile Include="Models\AdminAppsViewModels.cs" />
     <Compile Include="Models\AuthViewModels.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
@@ -1082,6 +1093,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201708081840021_Initial.resx">
       <DependentUpon>201708081840021_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708110031098_Initial2.resx">
+      <DependentUpon>201708110031098_Initial2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\EmployeeDBContext\201708110046466_InitialDatabaseCreation.resx">
+      <DependentUpon>201708110046466_InitialDatabaseCreation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

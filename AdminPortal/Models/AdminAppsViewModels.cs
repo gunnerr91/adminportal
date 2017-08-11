@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -35,20 +36,62 @@ namespace AdminPortal.Models.AdminAppsViewModels
         public DateTime? DateOfBirth { get; set; }
 
         [Required]
-        public int Salary { get; set; }
-
-        public bool QualifiesForBonusScheme { get; set; }
+        public int CurrentSalary { get; set; }
+        
     }
 
-    public class BonusViewModel
+    public class YearlyWageExpenditureViewModel
     {
+
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+
+        public int EmployeeId { get; set; }
         public string EmployeeName { get; set; }
-        public DateTime? CalendarYear { get; set; }
+
+        [Required(ErrorMessage = "Please specify the business year")]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime? BusinessYear { get; set; }
+
+        [Required(ErrorMessage = "Please specify the business year")]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime? CurrentSalaryStartDate { get; set; }
+
+        [Required(ErrorMessage = "Please specify the business year")]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime? CurrentSalaryEndDate { get; set; }
+
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime? OtherSalaryStartDate { get; set; }
+
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime? OtherSalaryEndDate { get; set; }
+
+        public int OtherSalary { get; set; }
+
         public int LoyaltyBonus { get; set; }
         public int SalesCommissionBonus { get; set; }
         public int HolidayBonus { get; set; }
         public int MissionBonus { get; set; }
         public int ReferalBonus { get; set; }
         public int OtherBonus { get; set; }
+        public int YearTotal { get; set; }
+    }
+
+    public class EmployeeDbContext : DbContext
+    {
+
+        public EmployeeDbContext()
+            : base("EmployeeContext")
+        {
+        }
+        public DbSet<NewEmployeeViewModel> Employees { get; set; }
+        public DbSet<YearlyWageExpenditureViewModel> YearlyExpenditure { get; set; }
     }
 }
