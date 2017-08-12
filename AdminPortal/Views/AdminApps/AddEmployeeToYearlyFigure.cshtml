@@ -1,0 +1,32 @@
+﻿@model AdminPortal.Models.AdminAppsViewModels.AddEmployeeYearlyFigureViewModel
+@{
+    ViewBag.Title = "Add to yearly figure";
+}
+
+<h2>Add to yearly figure</h2>
+
+<div class="container">
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            @Html.ValidationSummary()
+        </div>
+    }
+    <div class="row">
+        <div class="col-xs-offset-3 col-xs-6">
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    @using (Html.BeginForm())
+            {
+                        @Html.AntiForgeryToken()
+
+                        <input class="btn btn-primary" type="submit" value="Register" />
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

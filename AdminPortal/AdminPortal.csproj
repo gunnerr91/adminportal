@@ -1047,6 +1047,16 @@
       <DependentUpon>201708110046466_InitialDatabaseCreation.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\EmployeeDBContext\Configuration.cs" />
+    <Compile Include="Migrations\NewDatabase\201708120932133_NewCreation.cs" />
+    <Compile Include="Migrations\NewDatabase\201708120932133_NewCreation.Designer.cs">
+      <DependentUpon>201708120932133_NewCreation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\NewDatabase\Configuration.cs" />
+    <Compile Include="Migrations\newYearlyFigureModel\201708120921037_Version2.cs" />
+    <Compile Include="Migrations\newYearlyFigureModel\201708120921037_Version2.Designer.cs">
+      <DependentUpon>201708120921037_Version2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\newYearlyFigureModel\Configuration.cs" />
     <Compile Include="Models\AdminAppsViewModels.cs" />
     <Compile Include="Models\AuthViewModels.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
@@ -1080,6 +1090,9 @@
     <Content Include="Views\Auth\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartialNav.cshtml" />
     <Content Include="Views\AdminApps\NewEmployee.cshtml" />
+    <Content Include="Views\AdminApps\NewEmployeeAdded.cshtml" />
+    <Content Include="Views\AdminApps\YearlyWageExpenditure.cshtml" />
+    <Content Include="Views\AdminApps\AddEmployeeToYearlyFigure.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1099,6 +1112,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\EmployeeDBContext\201708110046466_InitialDatabaseCreation.resx">
       <DependentUpon>201708110046466_InitialDatabaseCreation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\NewDatabase\201708120932133_NewCreation.resx">
+      <DependentUpon>201708120932133_NewCreation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\newYearlyFigureModel\201708120921037_Version2.resx">
+      <DependentUpon>201708120921037_Version2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

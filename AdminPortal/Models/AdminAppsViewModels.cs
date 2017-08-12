@@ -40,13 +40,33 @@ namespace AdminPortal.Models.AdminAppsViewModels
         
     }
 
-    public class YearlyWageExpenditureViewModel
+    public class YearlyWageExpenditureModel
     {
-
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        public int EmployeeId { get; set; }
+        public string EmployeeName { get; set; }
+
+        [Required(ErrorMessage = "Please specify the business year")]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime? BusinessYear { get; set; }
+
+        #region Bonus Figures
+        public int LoyaltyBonus { get; set; }
+        public int SalesCommissionBonus { get; set; }
+        public int HolidayBonus { get; set; }
+        public int MissionBonus { get; set; }
+        public int ReferalBonus { get; set; }
+        public int OtherBonus { get; set; }
+        public int YearTotal { get; set; }
+        #endregion
+    }
+
+    public class EmployeeYearlyFigureViewModel
+    {
         public int EmployeeId { get; set; }
         public string EmployeeName { get; set; }
 
@@ -84,6 +104,16 @@ namespace AdminPortal.Models.AdminAppsViewModels
         public int YearTotal { get; set; }
     }
 
+    public class AddEmployeeYearlyFigureViewModel : EmployeeYearlyFigureViewModel
+    {
+
+    }
+
+    public class YearlyWageExpenditureViewModel : EmployeeYearlyFigureViewModel
+    {
+        public int YearFigureId { get; set; }
+    }
+
     public class EmployeeDbContext : DbContext
     {
 
@@ -92,6 +122,6 @@ namespace AdminPortal.Models.AdminAppsViewModels
         {
         }
         public DbSet<NewEmployeeViewModel> Employees { get; set; }
-        public DbSet<YearlyWageExpenditureViewModel> YearlyExpenditure { get; set; }
+        public DbSet<YearlyWageExpenditureModel> YearlyExpenditure { get; set; }
     }
 }
