@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace AdminPortal.Models.AdminAppsViewModels
 {
@@ -106,7 +107,7 @@ namespace AdminPortal.Models.AdminAppsViewModels
 
     public class AddEmployeeYearlyFigureViewModel : EmployeeYearlyFigureViewModel
     {
-
+        public IEnumerable<SelectListItem> EmployeeList { get; set; }
     }
 
     public class YearlyWageExpenditureViewModel : EmployeeYearlyFigureViewModel

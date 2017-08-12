@@ -1,4 +1,6 @@
 ﻿using AdminPortal.Models.AdminAppsViewModels;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace AdminPortal.Controllers
@@ -31,19 +33,50 @@ namespace AdminPortal.Controllers
 
         [HttpGet]
         [Route("add-employee-to-yearly-figure")]
-        public ActionResult AddEmployeeToYearlyFigure() => View(new AddEmployeeYearlyFigureViewModel());
+        public ActionResult AddEmployeeToYearlyFigure()
+        {
+            GetEmployeeList();
+            GetYearList();
+            return View(new AddEmployeeYearlyFigureViewModel());
+        }
+
+        [HttpPost]
+        [Route("add-employee-to-yearly-figure")]
+        public ActionResult AddEmployeeToYearlyFigure(AddEmployeeYearlyFigureViewModel model)
+        {
+            GetEmployeeList();
+            GetYearList();
+            return View(model);
+        }
 
 
         [HttpGet]
         [Route("yearly-wage-expenditure")]
         public ActionResult YearlyWageExpenditure()
         {
-            var model =  new YearlyWageExpenditureViewModel();
-
+            var model = new YearlyWageExpenditureViewModel();
+            GetEmployeeList();
             return View(model);
-        } 
+        }
+
+        public void GetEmployeeList()
+        {
+            var data = db.Employees.ToList();
+            ViewBag.EmployeeList = new SelectList(data, "Id", "Name");
+        }
+
+        public void GetYearList()
+        {
+            var data = new List<SelectListItem>();
+            for(var i = 2015; i <= System.DateTime.UtcNow.Year; i++)
+            {
+                data.Add(new SelectListItem { Value = i.ToString(), Text = i.ToString() });
+            }
+
+            ViewBag.YearList = new SelectList(data, "Value", "Text");
+        }
 
 
-       
+
     }
 }
