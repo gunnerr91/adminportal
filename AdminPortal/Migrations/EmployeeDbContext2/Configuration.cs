@@ -1,4 +1,4 @@
-namespace AdminPortal.Migrations
+namespace AdminPortal.Migrations.EmployeeDbContext2
 {
     using System;
     using System.Data.Entity;
@@ -10,6 +10,7 @@ namespace AdminPortal.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            MigrationsDirectory = @"Migrations\EmployeeDbContext2";
             ContextKey = "AdminPortal.Models.AdminAppsViewModels.EmployeeDbContext";
         }
 

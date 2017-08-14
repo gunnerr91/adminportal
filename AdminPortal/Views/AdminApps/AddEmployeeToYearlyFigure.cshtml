@@ -21,15 +21,130 @@
                     @using (Html.BeginForm())
             {
                         @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m => m.CurrentSalary)
+                        @Html.HiddenFor(m => m.EmployeeName)
                         <div class="form-group">
                             <label>Choose Employee</label>
                             @Html.DropDownListFor(m => m.EmployeeId, ViewBag.EmployeeList as SelectList, new { @class="form-control input-sm"})
+                            <input class="btn btn-primary" type="submit" value="Refresh page with Current User" formaction="@Url.Action("GetUserDetails",new { Model.EmployeeId})"/>
                         </div>
+                        if (Model.EmployeeDepartment.HasValue)
+                        {
+                            <div class="form-group">
+                                <label>Department</label>
+                                @Model.EmployeeDepartment.Value
+                            </div>
+
+                            <div class="form-group">
+                                <label>Year Joined</label>
+                                @Model.EmployeeJoinDate.Value.ToString("D")
+                            </div>
+                        }
                         <div class="form-group">
                             <label>Choose Business Year</label>
                             @Html.DropDownListFor(m => m.BusinessYear, ViewBag.YearList as SelectList, new { @class = "form-control input-sm" })
                         </div>
-                        <input class="btn btn-primary" type="submit" value="Add" />
+                        <div class="form-group">
+                            <label>
+                                Current Salary Start Date
+                            </label>
+                            @Html.TextBoxFor(m => m.CurrentSalaryStartDate, new { @class = "input-sm form-control" })
+                        </div>
+
+                        <div class="form-group">
+                            <label>
+                                Current Salary End Date
+                            </label>
+                            @Html.TextBoxFor(m => m.CurrentSalaryEndDate, new { @class = "input-sm form-control" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.CheckBoxFor(m => m.AddOtherSalary)
+                            <label>
+                                Include another salary range
+                            </label>
+                        </div>
+
+                        <div id="showOtherSalary" style="display:none;">
+                            <div class="form-group">
+                                <label>
+                                    Other Salary Start Date
+                                </label>
+                                @Html.TextBoxFor(m => m.OtherSalaryStartDate, new { @class = "input-sm form-control" })
+                            </div>
+
+                            <div class="form-group">
+                                <label>
+                                    Other Salary End Date
+                                </label>
+                                @Html.TextBoxFor(m => m.OtherSalaryEndDate, new { @class = "input-sm form-control" })
+                            </div>
+
+                            <div class="form-group">
+                                <label>
+                                    Other Salary
+                                </label>
+                                @Html.TextBoxFor(m => m.OtherSalary, new { @class = "input-sm form-control" })
+                            </div>
+                        </div>
+
+                        if (Model.EmployeeId.HasValue)
+                        {
+                            if (Model.EligibleForLoyaltyBonus)
+                            {
+                                <div class="form-group">
+                                    <label>
+                                        Loyalty Bonus Amount
+                                    </label>
+                                    @Html.TextBoxFor(m => m.LoyaltyBonus, new { @class = "input-sm form-control" })
+                                </div>
+                            }
+
+                            if (Model.EligibleForSalesCommisionBonus)
+                            {
+                                <div class="form-group">
+                                    <label>
+                                        Amount of sales
+                                    </label>
+                                    @Html.TextBoxFor(m => m.SalesCommissionBonus, new { @class = "input-sm form-control" })
+                                </div>
+                            }
+
+                            <div class="form-group">
+                                <label>
+                                    Amount of permited Holiday not taken
+                                </label>
+                                @Html.TextBoxFor(m => m.HolidayBonus, new { @class = "input-sm form-control" })
+                            </div>
+
+
+                            <div class="form-group">
+                                <label>
+                                    Mission Bonus
+                                </label>
+                                @Html.TextBoxFor(m => m.MissionBonus, new { @class = "input-sm form-control" })
+                            </div>
+
+                            if (Model.EligibleForReferalBonus)
+                            {
+                                <div class="form-group">
+                                    <label>
+                                        Amount of references
+                                    </label>
+                                    @Html.TextBoxFor(m => m.ReferalBonus, new { @class = "input-sm form-control" })
+                                </div>
+                            }
+
+                            <div class="form-group">
+                                <label>
+                                    Other Bonus
+                                </label>
+                                @Html.TextBoxFor(m => m.OtherBonus, new { @class = "input-sm form-control" })
+                            </div>
+
+                        }
+
+                        <input class="btn btn-primary" type="submit" value="Save Entry" />
                     }
                 </div>
             </div>
@@ -37,3 +152,50 @@
         </div>
     </div>
 </div>
+
+
+<script type="text/javascript">
+    $(function () {
+        $('#CurrentSalaryStartDate').datetimepicker({ format: 'DD/MM/YYYY' });
+        $('#CurrentSalaryEndDate').datetimepicker({ format: 'DD/MM/YYYY' });
+        $('#OtherSalaryStartDate').datetimepicker({ format: 'DD/MM/YYYY' });
+        $('#OtherSalaryEndDate').datetimepicker({ format: 'DD/MM/YYYY' });
+
+        $("#CurrentSalaryStartDate").on("dp.change", function (e) {
+            if ($('#CurrentSalaryEndDate').val() < $('#CurrentSalaryStartDate').val()) {
+                $("#CurrentSalaryEndDate").val($("#CurrentSalaryStartDate").val())
+            }
+            
+        });
+
+        $("#CurrentSalaryEndDate").on("dp.change", function (e) {
+            if ($('#CurrentSalaryStartDate').val() > $('#CurrentSalaryEndDate').val()) {
+                $("#CurrentSalaryStartDate").val($("#CurrentSalaryEndDate").val())
+            }
+
+        });
+
+        $("#OtherSalaryStartDate").on("dp.change", function (e) {
+            if ($('#OtherSalaryEndDate').val() < $('#OtherSalaryStartDate').val()) {
+                $("#OtherSalaryEndDate").val($("#OtherSalaryStartDate").val())
+            }
+
+        });
+
+        $("#OtherSalaryEndDate").on("dp.change", function (e) {
+            if ($('#OtherSalaryStartDate').val() > $('#OtherSalaryEndDate').val()) {
+                $("#OtherSalaryStartDate").val($("#OtherSalaryEndDate").val())
+            }
+
+        });
+
+        $("#AddOtherSalary").click(function () {
+            if ($(this).is(':checked')) {
+                $("#showOtherSalary").show();
+            }
+            else {
+                $("#showOtherSalary").hide();
+            }
+        });
+    });
+</script>

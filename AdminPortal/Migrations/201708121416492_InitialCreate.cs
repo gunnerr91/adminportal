@@ -1,9 +1,9 @@
-namespace AdminPortal.Migrations.EmployeeDBContext
+namespace AdminPortal.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialDatabaseCreation : DbMigration
+    public partial class InitialCreate : DbMigration
     {
         public override void Up()
         {
@@ -22,18 +22,13 @@ namespace AdminPortal.Migrations.EmployeeDBContext
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.YearlyWageExpenditureViewModels",
+                "dbo.YearlyWageExpenditureModels",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
                         EmployeeId = c.Int(nullable: false),
                         EmployeeName = c.String(),
-                        BusinessYear = c.Int(nullable: false),
-                        CurrentSalaryStartDate = c.DateTime(nullable: false),
-                        CurrentSalaryEndDate = c.DateTime(nullable: false),
-                        OtherSalaryStartDate = c.DateTime(),
-                        OtherSalaryEndDate = c.DateTime(),
-                        OtherSalary = c.Int(nullable: false),
+                        BusinessYear = c.DateTime(nullable: false),
                         LoyaltyBonus = c.Int(nullable: false),
                         SalesCommissionBonus = c.Int(nullable: false),
                         HolidayBonus = c.Int(nullable: false),
@@ -48,7 +43,7 @@ namespace AdminPortal.Migrations.EmployeeDBContext
         
         public override void Down()
         {
-            DropTable("dbo.YearlyWageExpenditureViewModels");
+            DropTable("dbo.YearlyWageExpenditureModels");
             DropTable("dbo.NewEmployeeViewModels");
         }
     }

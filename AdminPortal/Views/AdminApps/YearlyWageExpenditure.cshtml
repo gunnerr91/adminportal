@@ -1,4 +1,4 @@
-﻿
+﻿@model AdminPortal.Models.AdminAppsViewModels.YearlyWageExpenditureViewModel
 @{
     ViewBag.Title = "Yearly Wage Expenditure";
 }
@@ -6,9 +6,67 @@
 <h2>Yearly Wage Expenditure</h2>
 
 <div class="container-fluid">
+
+    <div class="row">
+        @using (Html.BeginForm())
+            {
+
+            <div class="form-group">
+                <div class="col-xs-offset-8 col-xs-3">
+                    @Html.DropDownListFor(m => m.BusinessYear, ViewBag.YearList as SelectList, new { @class = "form-control input-sm" })
+                </div>
+            </div>
+                <input class="btn btn-sm btn-default" value="Search" type="submit" />
+        }
+    </div>
+
+
     <div class="row">
         <div class="col-xs-12">
+            <br />
+            <div class="panel panel-default">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Year</th>
+                                <th>Employee Id</th>
+                                <th>Employee Name</th>
+                                <th>Year Total</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        @if (Model.YearWageTable != null && Model.YearWageTable.Count() > 0)
+                        {
+                            <tbody>
+                                @foreach (var entry in Model.YearWageTable)
+                                {
+                                    <tr>
+                                        <td><p class="form-control-static">@entry.BusinessYear</p></td>
+                                        <td><p class="form-control-static">@entry.EmployeeId</p></td>
+                                        <td><p class="form-control-static">@entry.EmployeeName</p></td>
+                                        <td><p class="form-control-static">@entry.YearTotal</p></td>
+                                        <td>
+                                            <a href="@Url.Action("EditEntry", new { yearId = entry.YearId})" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-adjust"></i> Edit</a>
+                                            &nbsp;
+                                            <a href="@Url.Action("DeleteEntry", new { yearId = entry.YearId})" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-trash"></i> Delete</a>
+                                        </td>
+                                    </tr>
+                                }
 
+                            </tbody>
+                        }
+                        else
+                        {
+                            <tfoot>
+                                <tr>
+                                    <td class="text-center" colspan="4">No entries have been added</td>
+                                </tr>
+                            </tfoot>
+                        }
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 

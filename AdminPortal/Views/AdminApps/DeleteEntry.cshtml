@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Delete Entry";
+}
+
+<h2>Delete this entry? </h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="well well-sm">
+                <p>
+                    Are you sure you would like to delete this entry?
+                </p>
+                @using (Html.BeginForm())
+                {
+                    <input class="btn btn-sm btn-default" type="submit" value="Delete"/>
+                    <a href="@Url.Action("YearlyWageExpenditure")" class="btn btn-sm btn-default">Cancel</a>
+                }
+            </div>
+        </div>
+    </div>
+</div>

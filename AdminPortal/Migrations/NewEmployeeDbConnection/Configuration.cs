@@ -1,4 +1,4 @@
-namespace AdminPortal.Migrations
+namespace AdminPortal.Migrations.NewEmployeeDbConnection
 {
     using System;
     using System.Data.Entity;
@@ -10,7 +10,7 @@ namespace AdminPortal.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "AdminPortal.Models.AdminAppsViewModels.EmployeeDbContext";
+            MigrationsDirectory = @"Migrations\NewEmployeeDbConnection";
         }
 
         protected override void Seed(AdminPortal.Models.AdminAppsViewModels.EmployeeDbContext context)

@@ -1041,7 +1041,16 @@
     <Compile Include="Migrations\201708110031098_Initial2.Designer.cs">
       <DependentUpon>201708110031098_Initial2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708121416492_InitialCreate.cs" />
+    <Compile Include="Migrations\201708121416492_InitialCreate.Designer.cs">
+      <DependentUpon>201708121416492_InitialCreate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\EmployeeDbContext2\201708141656055_UpdatedEmployeeDbContext.cs" />
+    <Compile Include="Migrations\EmployeeDbContext2\201708141656055_UpdatedEmployeeDbContext.Designer.cs">
+      <DependentUpon>201708141656055_UpdatedEmployeeDbContext.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\EmployeeDbContext2\Configuration.cs" />
     <Compile Include="Migrations\EmployeeDBContext\201708110046466_InitialDatabaseCreation.cs" />
     <Compile Include="Migrations\EmployeeDBContext\201708110046466_InitialDatabaseCreation.Designer.cs">
       <DependentUpon>201708110046466_InitialDatabaseCreation.cs</DependentUpon>
@@ -1052,6 +1061,11 @@
       <DependentUpon>201708120932133_NewCreation.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\NewDatabase\Configuration.cs" />
+    <Compile Include="Migrations\NewEmployeeDbConnection\201708141705469_NewEmployeeDbContext.cs" />
+    <Compile Include="Migrations\NewEmployeeDbConnection\201708141705469_NewEmployeeDbContext.Designer.cs">
+      <DependentUpon>201708141705469_NewEmployeeDbContext.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\NewEmployeeDbConnection\Configuration.cs" />
     <Compile Include="Migrations\newYearlyFigureModel\201708120921037_Version2.cs" />
     <Compile Include="Migrations\newYearlyFigureModel\201708120921037_Version2.Designer.cs">
       <DependentUpon>201708120921037_Version2.cs</DependentUpon>
@@ -1093,6 +1107,9 @@
     <Content Include="Views\AdminApps\NewEmployeeAdded.cshtml" />
     <Content Include="Views\AdminApps\YearlyWageExpenditure.cshtml" />
     <Content Include="Views\AdminApps\AddEmployeeToYearlyFigure.cshtml" />
+    <Content Include="Views\AdminApps\EntryAddedSuccessfully.cshtml" />
+    <Content Include="Views\AdminApps\EditEntry.cshtml" />
+    <Content Include="Views\AdminApps\DeleteEntry.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1110,11 +1127,20 @@
     <EmbeddedResource Include="Migrations\201708110031098_Initial2.resx">
       <DependentUpon>201708110031098_Initial2.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708121416492_InitialCreate.resx">
+      <DependentUpon>201708121416492_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\EmployeeDbContext2\201708141656055_UpdatedEmployeeDbContext.resx">
+      <DependentUpon>201708141656055_UpdatedEmployeeDbContext.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\EmployeeDBContext\201708110046466_InitialDatabaseCreation.resx">
       <DependentUpon>201708110046466_InitialDatabaseCreation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\NewDatabase\201708120932133_NewCreation.resx">
       <DependentUpon>201708120932133_NewCreation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\NewEmployeeDbConnection\201708141705469_NewEmployeeDbContext.resx">
+      <DependentUpon>201708141705469_NewEmployeeDbContext.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\newYearlyFigureModel\201708120921037_Version2.resx">
       <DependentUpon>201708120921037_Version2.cs</DependentUpon>

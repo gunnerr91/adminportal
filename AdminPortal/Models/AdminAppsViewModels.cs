@@ -49,11 +49,8 @@ namespace AdminPortal.Models.AdminAppsViewModels
 
         public int EmployeeId { get; set; }
         public string EmployeeName { get; set; }
-
-        [Required(ErrorMessage = "Please specify the business year")]
-        [DataType(DataType.DateTime)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        public DateTime? BusinessYear { get; set; }
+        
+        public int BusinessYear { get; set; }
 
         #region Bonus Figures
         public int LoyaltyBonus { get; set; }
@@ -68,13 +65,11 @@ namespace AdminPortal.Models.AdminAppsViewModels
 
     public class EmployeeYearlyFigureViewModel
     {
-        public int EmployeeId { get; set; }
+        public int? EmployeeId { get; set; }
         public string EmployeeName { get; set; }
-
-        [Required(ErrorMessage = "Please specify the business year")]
-        [DataType(DataType.DateTime)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        public DateTime? BusinessYear { get; set; }
+        public DateTime? EmployeeJoinDate { get; set; }
+        public int CurrentSalary { get; set; }
+        public int BusinessYear { get; set; }
 
         [Required(ErrorMessage = "Please specify the business year")]
         [DataType(DataType.DateTime)]
@@ -94,25 +89,61 @@ namespace AdminPortal.Models.AdminAppsViewModels
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? OtherSalaryEndDate { get; set; }
 
-        public int OtherSalary { get; set; }
+        public int? OtherSalary { get; set; }
 
-        public int LoyaltyBonus { get; set; }
-        public int SalesCommissionBonus { get; set; }
-        public int HolidayBonus { get; set; }
-        public int MissionBonus { get; set; }
-        public int ReferalBonus { get; set; }
-        public int OtherBonus { get; set; }
-        public int YearTotal { get; set; }
+        public bool EligibleForLoyaltyBonus { get; set; }
+        public int? LoyaltyBonus { get; set; }
+
+        public bool EligibleForSalesCommisionBonus { get; set; }
+        public int? SalesCommissionBonus { get; set; }
+
+        public int? HolidayBonus { get; set; }
+        public int? MissionBonus { get; set; }
+
+        public bool EligibleForReferalBonus { get; set; }
+        public int? ReferalBonus { get; set; }
+
+        public int? OtherBonus { get; set; }
+        public int? YearTotal { get; set; }
     }
 
     public class AddEmployeeYearlyFigureViewModel : EmployeeYearlyFigureViewModel
     {
         public IEnumerable<SelectListItem> EmployeeList { get; set; }
+        public bool AddOtherSalary { get; set; } = false;
+        public EmployeeDepartments? EmployeeDepartment { get; set; }
     }
 
-    public class YearlyWageExpenditureViewModel : EmployeeYearlyFigureViewModel
+    public class YearlyWageExpenditureViewModel 
     {
-        public int YearFigureId { get; set; }
+        public int BusinessYear { get; set; }
+        public IList<YearlyWageExpenditureTableModel> YearWageTable { get; set; }
+    }
+
+    public class EditEntryViewModel
+    {
+        [Required]
+        public string EmployeeName { get; set; }
+
+        [Required]
+        public int YearTotal { get; set; }
+
+        public int YearId { get; set; }
+    }
+
+    public class DeleteEntryViewModel
+    {
+        public int YearId { get; set; }
+    }
+
+    public class YearlyWageExpenditureTableModel
+    {
+        public int YearId { get; set; }
+        public int EmployeeId { get; set; }
+        public int BusinessYear { get; set; }
+        public string EmployeeName { get; set; }
+        public EmployeeDepartments EmployeeDepartment { get; set; }
+        public int YearTotal { get; set; }
     }
 
     public class EmployeeDbContext : DbContext
