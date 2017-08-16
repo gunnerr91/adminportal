@@ -1030,6 +1030,7 @@
     <Compile Include="Controllers\AdminAppsController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\YearlyWageExpenditureController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1110,6 +1111,7 @@
     <Content Include="Views\AdminApps\EntryAddedSuccessfully.cshtml" />
     <Content Include="Views\AdminApps\EditEntry.cshtml" />
     <Content Include="Views\AdminApps\DeleteEntry.cshtml" />
+    <Content Include="Views\AdminApps\YearlyWageExpenditureSPA.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

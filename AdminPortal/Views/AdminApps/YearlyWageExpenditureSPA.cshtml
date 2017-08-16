@@ -1,0 +1,335 @@
+﻿
+@{
+    ViewBag.Title = "Yearly Wage Expenditure - SPA";
+}
+
+<h2>Yearly Wage Expenditure Single Page Application</h2>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <input class="btn btn-sm btn-primary" type="submit" value="Quick Add New Employee" data-toggle="modal" data-target="#quickAddNewEmployee">
+            <hr />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-offset-10 col-sm-2">
+            <select class="form-control input-sm" id="selectYearList"></select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <br />
+            <div class="panel panel-default">
+                <div class="table-responsive" id="generateTable"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editEntryModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Edit Entry</h4>
+                </div>
+                <form class="form-horizontal">
+                    @Html.Hidden("YearId")
+                    <div class="modal-body">
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label class="control-label"> Employee Name</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input id="EmployeeName" name="EmployeeName" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label class="control-label"> Year Total</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input id="YearTotal" name="YearTotal" type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input value="Save" id="btnedit" type="submit" class="btn btn-success"/>
+                        <input value="Close" type="button" class="btn btn-default" data-dismiss="modal" />
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="deleteEntryModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Delete Entry</h4>
+                </div>
+                <form class="form-horizontal">
+                    @Html.Hidden("YearIdToDelete")
+                    <div class="modal-body">
+                        <p>
+                            Are you sure you would like to remove <span id="employeeNameToDelete"></span> from the year <span id="businessYearFromToDelete"></span>
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <input value="Delete" id="confirmDeleteBtn" type="submit" class="btn btn-danger" />
+                        <input value="Close" type="button" class="btn btn-default" data-dismiss="modal" />
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal fade" id="quickAddNewEmployee" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Quick Add New Employee</h4>
+                </div>
+                <form class="form-horizontal">
+                    <div class="modal-body">
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label>
+                                    Employee Name
+                                </label>
+                            </div>
+                            <div class="col-sm-6">@Html.TextBox("EmployeeNameForQuickAdd", null, new { @class = "input-sm form-control", required = "required" })</div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label>
+                                    Employee Department
+                                </label>
+                            </div>
+                            <div class="col-sm-6">
+                                <select class="input-sm form-control" data-val="true" data-val-required="The Department field is required." id="DepartmentForQuickAdd" name="DepartmentForQuickAdd">
+                                    <option selected="selected" value="0">Sales Department</option>
+                                    <option value="1">Marketing Department</option>
+                                    <option value="2">Logistics Department</option>
+                                    <option value="3">Tech Department</option>
+                                    <option value="4">Web Development Department</option>
+                                    <option value="5">IT Support Department</option>
+                                    <option value="6">Human Resources Department</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                                <label>
+                                    Date Joined
+                                </label>
+                            </div>
+                            <div class="col-sm-6"> @Html.TextBox("DateJoinedForQuickAdd", null, new { @class = "input-sm form-control", required = "required" })</div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                                <label>
+                                    Contract End Date
+                                </label>
+                            </div>
+                            <div class="col-sm-6">@Html.TextBox("ContractEndDateForQuickAdd", null, new { @class = "input-sm form-control", required = "required" })</div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                                <label>
+                                    Date of Birth
+                                </label>
+                            </div>
+                            <div class="col-sm-6"> @Html.TextBox("DateOfBirthForQuickAdd", null, new { @class = "input-sm form-control", required = "required" })</div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                                <label>
+                                    Employee Salary
+                                </label>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon">£</span>
+                                    @Html.TextBox("CurrentSalaryForQuickAdd", null, new { @class = "input-sm form-control", required = "required" })
+                                    <span class="input-group-addon">Yearly</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <input value="Save" id="quickAddNewEmployeeBtn" type="submit" class="btn btn-success" />
+                        <input value="Close" type="button" class="btn btn-default" data-dismiss="modal" />
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        generateYearDropDown();
+        loadTable();
+
+        $('#selectYearList').change(function () {
+            console.log($(this).val());
+            loadTable($(this).val());
+        });
+
+        $("#btnedit").click(function () {
+            console.log("edit button submit clicked");
+            $.ajax({
+                type: "PUT",
+                url: "/webapi/yearly-wage-exp/put-entry-details-for-edit",
+                contentType: "application/json",
+                data: JSON.stringify({ "YearId": $('#YearId').val(), "EmployeeName": $('#EmployeeName').val(), "YearTotal": $('#YearTotal').val() }),
+                success: function () {
+                    $('#editEntryModal').modal('hide');
+                    loadTable();
+                },
+                error: function (data, statusCode) {
+                    console.log("unable to perform action, error: " + statusCode + "\ndata" + data);
+                }
+
+            });
+
+        });
+
+        $("#confirmDeleteBtn").click(function () {
+            $.ajax({
+                url: "/webapi/yearly-wage-exp/delete/" + $('#YearIdToDelete').val(),
+                type: "DELETE",
+                contentType: "application/json",
+                success: function (data) {
+                    $("#deleteEntryModal").modal("hide");
+                    loadPage();
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("Error, couldn't delete(xhr,errorThrown,textStatus) " + xhr + "," + errorThrown + "," + textStatus);
+                }
+            });
+
+
+        });
+
+        $('#DateJoinedForQuickAdd').datetimepicker({ format: 'DD/MM/YYYY' });
+        $('#ContractEndDateForQuickAdd').datetimepicker({ format: 'DD/MM/YYYY' });
+        $('#DateOfBirthForQuickAdd').datetimepicker({ format: 'DD/MM/YYYY' });
+
+        $("#DateJoinedForQuickAdd").on("dp.change", function (e) {
+            if ($('#ContractEndDateForQuickAdd').val() < $('#DateJoinedForQuickAdd').val()) {
+                $("#ContractEndDateForQuickAdd").val($("#DateJoinedForQuickAdd").val())
+            }
+        });
+
+        $("#quickAddNewEmployeeBtn").click(function () {
+            var passData = {
+                "Name": $('#EmployeeNameForQuickAdd').val(),
+                "Department": $('#DepartmentForQuickAdd').val(),
+                "DateJoined": moment($('#DateJoinedForQuickAdd').val(), "MM-DD-YYYY"),
+                "ContractEndDate": moment($('#ContractEndDateForQuickAdd').val(), "MM-DD-YYYY"),
+                "DateOfBirth": moment($('#DateOfBirthForQuickAdd').val(), "MM-DD-YYYY"),
+                "CurrentSalary": $('#CurrentSalaryForQuickAdd').val()
+            };
+            $.ajax({
+                url: "/webapi/yearly-wage-exp/quick-add-new-employee/",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(passData),
+                success: function (data) {
+                    $("#quickAddNewEmployee").modal("hide");
+                    loadPage();
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("Error, couldn't delete(xhr,errorThrown,textStatus) " + xhr + "," + errorThrown + "," + textStatus);
+                }
+            });
+        });
+
+    });
+
+    var generateYearDropDown = function () {
+        var min = 2015,
+            max = new Date().getFullYear(),
+            select = document.getElementById('selectYearList');
+
+        for (var i = min; i <= max; i++) {
+            var opt = document.createElement('option');
+            opt.value = i;
+            opt.innerHTML = i;
+            select.appendChild(opt);
+        }
+    };
+
+    var loadTable = function (businessYear) {
+        $.getJSON("/webapi/yearly-wage-exp/get-table-data/" + businessYear)
+            .done(function (data) {
+                var table = $('<table/>').addClass("table table-striped");
+                var headerFields = $('<thead/>')
+                    .append($("<th/>").text("Year Id"))
+                    .append($("<th/>").text("Business Year"))
+                    .append($("<th/>").text("Employee Id"))
+                    .append($("<th/>").text("Employee Name"))
+                    .append($("<th/>").text("Year Total"))
+                    .append($("<th/>").text());
+                table.append(headerFields);
+                table.append($("<tbody>"));
+                $.each(data, function (i, val) {
+                    var row = $("<tr/>");
+                    row.append($("<td/>").html(val.YearId));
+                    row.append($("<td/>").html(val.BusinessYear));
+                    row.append($("<td/>").html(val.EmployeeId));
+                    row.append($("<td/>").html(val.EmployeeName));
+                    row.append($("<td/>").html(val.YearTotal));
+                    var editEntry = $('<input/>').addClass("btn btn-sm btn-warning").val('Edit Entry').prop("type", "submit").attr("data-toggle", "modal").attr("data-target", "#editEntryModal").click(function () {
+                        $.ajax({
+                            cache: false,
+                            url: "/webapi/yearly-wage-exp/get-entry-details-for-edit/" + val.YearId,
+                            contentType: "application/json",
+                            type: "GET",
+                            success: function (data) {
+                                console.log(data.YearId);
+                                $("#YearId").val(data.YearId);
+                                $("#EmployeeName").val(data.EmployeeName);
+                                $("#YearTotal").val(data.YearTotal);
+                            },
+                        });
+                    });
+                    var deleteEntry = $('<input/>').addClass("btn btn-sm btn-danger").val('Delete Entry').prop("type", "submit").attr("data-toggle", "modal").attr("data-target", "#deleteEntryModal").click(function () {
+                        $("#YearIdToDelete").val(val.YearId)
+                        $("#employeeNameToDelete").append(val.EmployeeName);
+                        $("#businessYearFromToDelete").append(val.BusinessYear);
+                    });
+                    row.append($("<td/>").append($("<div/>").addClass("btn-group").append(editEntry).append(deleteEntry)));
+                    table.append(row);
+                });
+                table.append($("</tbody>"));
+                $('#generateTable').html(table);
+
+            });
+
+    }
+
+
+
+</script>
