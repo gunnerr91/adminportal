@@ -47,8 +47,6 @@ namespace AdminPortal.Controllers
                 model.EmployeeJoinDate = employeedetails.DateJoined;
                 model.CurrentSalary = employeedetails.CurrentSalary;
                 model.EmployeeName = employeedetails.Name;
-                model.CurrentSalaryStartDate = model.EmployeeJoinDate;
-                model.CurrentSalaryEndDate = model.EmployeeJoinDate.Value.AddDays(1);
                 if ((businessYear - employeedetails.DateJoined.Value.Year) >= 1) model.EligibleForLoyaltyBonus = true;
                 if (model.EmployeeDepartment == EmployeeDepartments.HR) model.EligibleForReferalBonus = true;
                 if (model.EmployeeDepartment == EmployeeDepartments.Sales) model.EligibleForSalesCommisionBonus = true;

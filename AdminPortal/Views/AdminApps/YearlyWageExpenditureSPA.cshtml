@@ -10,6 +10,7 @@
     <div class="row">
         <div class="col-xs-12">
             <input class="btn btn-sm btn-primary" type="submit" value="Quick Add New Employee" data-toggle="modal" data-target="#quickAddNewEmployee">
+            <input id="addNewEntry" class="btn btn-sm btn-primary" type="submit" value="Quick Add Entry" data-toggle="modal" data-target="#quickAddNewEntry">
             <hr />
         </div>
     </div>
@@ -58,7 +59,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <input value="Save" id="btnedit" type="submit" class="btn btn-success"/>
+                        <input value="Save" id="btnedit" type="submit" class="btn btn-success" />
                         <input value="Close" type="button" class="btn btn-default" data-dismiss="modal" />
                     </div>
                 </form>
@@ -66,7 +67,6 @@
 
         </div>
     </div>
-
 
     <div class="modal fade" id="deleteEntryModal" role="dialog">
         <div class="modal-dialog">
@@ -184,15 +184,214 @@
         </div>
     </div>
 
+
+    <div class="modal fade" id="quickAddNewEntry" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Quick Add New Entry</h4>
+                </div>
+                <form class="form-horizontal">
+                    <div class="modal-body">
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label>
+                                    Choose Employee
+                                </label>
+                            </div>
+                            <div class="col-sm-6">
+                                <select class="input-sm form-control" id="EmployeeDropdown" name="EmployeeDropdown"></select>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label>
+                                    Choose Business year
+                                </label>
+                            </div>
+                            <div class="col-sm-6"><select class="form-control input-sm" id="newEntryYearList"></select></div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label>
+                                    Year Start Date
+                                </label>
+                            </div>
+                            <div class="col-sm-6">@Html.TextBox("YearStartDate", null, new { @class = "input-sm form-control", required = "required" })</div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label>
+                                    Year End Date
+                                </label>
+                            </div>
+                            <div class="col-sm-6">@Html.TextBox("YearEndDate", null, new { @class = "input-sm form-control", required = "required" })</div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-sm-6">
+                                @Html.CheckBox("AddOtherSalary")
+                                <label>
+                                    Include another salary range
+                                </label>
+                            </div>
+                        </div>
+                        <div id="showOtherSalary" style="display:none;">
+                            <div class="row form-group">
+                                <div class="col-sm-3">
+                                    <label>
+                                        Other Salary Start Date
+                                    </label>
+                                </div>
+                                <div class="col-sm-6"> @Html.TextBox("OtherSalaryStartDate", null, new { @class = "input-sm form-control" })</div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col-sm-3">
+                                    <label>
+                                        Other Salary End Date
+                                    </label>
+                                </div>
+                                <div class="col-sm-6"> @Html.TextBox("OtherSalaryEndDate", null, new { @class = "input-sm form-control" })</div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col-sm-3">
+                                    <label>
+                                        Other Salary
+                                    </label>
+                                </div>
+                                <div class="col-sm-6"> @Html.TextBox("OtherSalary", null, new { @class = "input-sm form-control" })</div>
+                            </div>
+
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label>
+                                    Loyalty Bonus Amount
+                                </label>
+                            </div>
+                            <div class="col-sm-6"> @Html.TextBox("LoyaltyBonus", null, new { @class = "input-sm form-control" })</div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label>
+                                    Amount of sales
+                                </label>
+                            </div>
+                            <div class="col-sm-6"> @Html.TextBox("SalesCommissionBonus", null, new { @class = "input-sm form-control" })</div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label>
+                                    Amount of permited Holiday not taken
+                                </label>
+                            </div>
+                            <div class="col-sm-6"> @Html.TextBox("HolidayBonus", null, new { @class = "input-sm form-control" })</div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label>
+                                    Mission Bonus
+                                </label>
+                            </div>
+                            <div class="col-sm-6"> @Html.TextBox("MissionBonus", null, new { @class = "input-sm form-control" })</div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label>
+                                    Amount of references
+                                </label>
+                            </div>
+                            <div class="col-sm-6"> @Html.TextBox("ReferalBonus", null, new { @class = "input-sm form-control" })</div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label>
+                                    Other Bonus
+                                </label>
+                            </div>
+                            <div class="col-sm-6"> @Html.TextBox("OtherBonus", null, new { @class = "input-sm form-control" })</div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <input value="Save" id="quickAddNewEntrySaveBtn" type="submit" class="btn btn-success" />
+                        <input value="Close" type="button" class="btn btn-default" data-dismiss="modal" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <script type="text/javascript">
     $(function () {
         generateYearDropDown();
         loadTable();
+        getEmployeeList();
+
+        var min = 2015,
+            max = new Date().getFullYear(),
+            select = document.getElementById('newEntryYearList');
+
+        for (var i = min; i <= max; i++) {
+            var opt = document.createElement('option');
+            opt.value = i;
+            opt.innerHTML = i;
+            select.appendChild(opt);
+        };
+
+        $('#YearStartDate').datetimepicker({ format: 'DD/MM/YYYY' });
+        $('#YearEndDate').datetimepicker({ format: 'DD/MM/YYYY' });
+        $('#OtherSalaryStartDate').datetimepicker({ format: 'DD/MM/YYYY' });
+        $('#OtherSalaryEndDate').datetimepicker({ format: 'DD/MM/YYYY' });
+
+        $("#YearStartDate").on("dp.change", function (e) {
+            if ($('#YearEndDate').val() < $('#YearStartDate').val()) {
+                $("#YearEndDate").val($("#YearStartDate").val())
+            }
+
+        });
+
+        $("#YearEndDate").on("dp.change", function (e) {
+            if ($('#YearStartDate').val() > $('#YearEndDate').val()) {
+                $("#YearStartDate").val($("#YearEndDate").val())
+            }
+
+        });
+
+        $("#OtherSalaryStartDate").on("dp.change", function (e) {
+            if ($('#OtherSalaryEndDate').val() < $('#OtherSalaryStartDate').val()) {
+                $("#OtherSalaryEndDate").val($("#OtherSalaryStartDate").val())
+            }
+
+        });
+
+        $("#OtherSalaryEndDate").on("dp.change", function (e) {
+            if ($('#OtherSalaryStartDate').val() > $('#OtherSalaryEndDate').val()) {
+                $("#OtherSalaryStartDate").val($("#OtherSalaryEndDate").val())
+            }
+
+        });
+
+        $("#AddOtherSalary").click(function () {
+            if ($(this).is(':checked')) {
+                $("#showOtherSalary").show();
+            }
+            else {
+                $("#showOtherSalary").hide();
+            }
+        });
 
         $('#selectYearList').change(function () {
-            console.log($(this).val());
             loadTable($(this).val());
         });
 
@@ -266,6 +465,38 @@
             });
         });
 
+
+        $("#quickAddNewEntrySaveBtn").click(function () {
+            var passData = {
+                "EmployeeId": $('#EmployeeDropdown').val(),
+                "BusinessYear": $('#newEntryYearList').val(),
+                "CurrentSalaryStartDate": moment($('#YearStartDate').val(), "MM-DD-YYYY"),
+                "CurrentSalaryEndDate": moment($('#YearEndDate').val(), "MM-DD-YYYY"),
+                "OtherSalaryStartDate": moment($('#OtherSalaryStartDate').val(), "MM-DD-YYYY"),
+                "OtherSalaryEndDate": moment($('#OtherSalaryEndDate').val(), "MM-DD-YYYY"),
+                "OtherSalary": $('#OtherSalary').val(),
+                "SalesCommissionBonus": $('#SalesCommissionBonus').val(),
+                "LoyaltyBonus": $('#LoyaltyBonus').val(),
+                "ReferalBonus": $('#ReferalBonus').val(),
+                "OtherBonus": $('#OtherBonus').val(),
+                "HolidayBonus": $('#HolidayBonus').val(),
+                "MissionBonus": $('#MissionBonus').val()
+            };
+            $.ajax({
+                url: "/webapi/yearly-wage-exp/quick-add-new-entry/" + $("#newEntryYearList").val(),
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(passData),
+                success: function (data) {
+                    $("#quickAddNewEntry").modal("hide");
+                    loadPage();
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("Error, couldn't delete(xhr,errorThrown,textStatus) " + xhr + "," + errorThrown + "," + textStatus);
+                }
+            });
+        });
+
     });
 
     var generateYearDropDown = function () {
@@ -328,6 +559,24 @@
 
             });
 
+    };
+
+    var getEmployeeList = function () {
+        $.ajax({
+            type: "get",
+            url: "/webapi/yearly-wage-exp/get-employee-list-for-new-entry",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            data: {},
+            success: function (result) {
+                $.each(result, function (i) {
+                    $('#EmployeeDropdown').append($('<option></option>').val(result[i].Value).html(result[i].Text));
+                });
+            },
+            failure: function () {
+                alert("Error");
+            }
+        });
     }
 
 
