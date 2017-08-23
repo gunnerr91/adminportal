@@ -1113,6 +1113,7 @@
     <Content Include="Views\AdminApps\EditEntry.cshtml" />
     <Content Include="Views\AdminApps\DeleteEntry.cshtml" />
     <Content Include="Views\AdminApps\YearlyWageExpenditureSPA.cshtml" />
+    <Content Include="Views\AdminApps\YearlyWageExpenditureAngular.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

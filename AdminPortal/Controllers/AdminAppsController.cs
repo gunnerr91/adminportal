@@ -135,10 +135,11 @@ namespace AdminPortal.Controllers
 
         [HttpGet]
         [Route("yearly-wage-expenditure-spa")]
-        public ActionResult YearlyWageExpenditureSPA()
-        {
-            return View();
-        }
+        public ActionResult YearlyWageExpenditureSPA() => View();
+
+        [HttpGet]
+        [Route("yearly-wage-expenditure-spa-angular")]
+        public ActionResult YearlyWageExpenditureAngular() => View();
 
         [HttpGet]
         [Route("edit-entry")]
