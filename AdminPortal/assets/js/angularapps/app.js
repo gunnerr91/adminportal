@@ -1,0 +1,1 @@
+﻿var ngSpaApp = angular.module("ngSpaApp", []); 
