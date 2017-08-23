@@ -145,6 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\images\eddie_2.png" />
+    <Content Include="assets\js\spa.js" />
     <Content Include="Content\bootstrap-datetimepicker.css" />
     <Content Include="Content\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
