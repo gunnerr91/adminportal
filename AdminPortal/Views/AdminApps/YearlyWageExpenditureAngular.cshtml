@@ -19,6 +19,7 @@
                 <select class="form-control" ng-model="selectedYear" ng-change="load(selectedYear)">
                     <option ng-repeat="year in years">{{year}}</option>
                 </select>
+                <br />
             </div>
         </div>
         <div class="row">
@@ -41,7 +42,12 @@
                                     <td>{{entry.EmployeeId}}</td>
                                     <td>{{entry.EmployeeName}}</td>
                                     <td>{{entry.YearTotal}}</td>
-                                    <td></td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <input class="btn btn-sm btn-warning" type="submit" value="Edit Entry" data-toggle="modal" data-target="#editEntryModal">
+                                            <input class="btn btn-sm btn-danger" type="submit" value="Delete Entry" data-toggle="modal" data-target="#deleteEntryModal">
+                                        </div>
+                                    </td>
                                 </tr>
 
                             </tbody>
