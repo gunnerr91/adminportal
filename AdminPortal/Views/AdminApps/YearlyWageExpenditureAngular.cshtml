@@ -5,13 +5,43 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script src="~/assets/js/angularapps/app.js"></script>
-<script src="~/assets/js/angularapps/scripts/appController.js"></script>
 <script src="~/assets/js/angularapps/scripts/appServices.js"></script>
+<script src="~/assets/js/angularapps/scripts/appController.js"></script>
 
 <h2>Year Wage Expenditure - Angular </h2>
 
 <div class="container">
-    <div ng-app="ngSpaApp" ng-controller="ngSpaAppController">
+
+    <div ng-app="ngSpaApp" ng-controller="ngSpaAppController" ng-init="init()">
         {{test}}
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Year</th>
+                                    <th>Employee Id</th>
+                                    <th>Employee Name</th>
+                                    <th>Year Total</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="entry in YearList">
+                                    <td>{{entry.BusinessYear}}</td>
+                                    <td>{{entry.EmployeeId}}</td>
+                                    <td>{{entry.EmployeeName}}</td>
+                                    <td>{{entry.YearTotal}}</td>
+                                    <td></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
