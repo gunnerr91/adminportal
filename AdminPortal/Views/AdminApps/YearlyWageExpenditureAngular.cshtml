@@ -15,6 +15,13 @@
     <div ng-app="ngSpaApp" ng-controller="ngSpaAppController" ng-init="init()">
         {{test}}
         <div class="row">
+            <div class="col-xs-offset-8 col-xs-4 text-right">
+                <select class="form-control" ng-model="selectedYear" ng-change="load(selectedYear)">
+                    <option ng-repeat="year in years">{{year}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-xs-12">
                 <div class="panel panel-default">
                     <div class="table-responsive">
