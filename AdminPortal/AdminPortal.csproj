@@ -1127,6 +1127,7 @@
     <Content Include="Views\AdminApps\YearlyWageExpenditureAngular.cshtml" />
     <Content Include="Views\AdminApps\_quickAddModal.cshtml" />
     <Content Include="Views\AdminApps\_quickAddNewEntryModal.cshtml" />
+    <Content Include="Views\AdminApps\_quickEditEntryModal.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

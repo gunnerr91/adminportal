@@ -39,7 +39,68 @@
             controller: "ngQuickAddNewEntryModalController"
         })
     }
+
+    $scope.quickEditEntryModal = function (entry, index, existingList) {
+        var modalInstance = $uibModal.open({
+            size: "md",
+            animation: true,
+            templateUrl: "quick-edit-entry-modal.html",
+            controller: "ngQuickEditEntryModalController",
+            resolve: {
+                entry: function () {
+                    return entry;
+                },
+                index: function () {
+                    return index;
+                }, 
+                existingList: function () {
+                    return existingList;
+                } 
+            }
+        })
+    }
+
+    $scope.delete = function (yearId) {
+        ngSpaAppService
+            .deleteEntry(yearId)
+            .then(function (response) {
+                $scope.load($scope.selectedYear);
+            })
+    }
 });
+
+ngSpaApp.controller('ngQuickEditEntryModalController',
+    function ($scope, $uibModalInstance, ngSpaAppService, $http, entry, index, existingList) {
+        console.log(existingList);
+        $scope.employeeName = entry.EmployeeName;
+        $scope.yearTotal = entry.YearTotal;
+        $scope.YearList = existingList;
+        $scope.jsonObjectForNewEmployeeModel = {};
+        $scope.save = function () {
+            $scope.jsonObjectForNewEmployeeModel.EmployeeName = $scope.employeeName;
+            $scope.jsonObjectForNewEmployeeModel.YearTotal = $scope.yearTotal;
+            $scope.jsonObjectForNewEmployeeModel.YearId = entry.YearId;
+            ngSpaAppService
+                .saveEntryAmendments($scope.jsonObjectForNewEmployeeModel)
+                .then(function (response) {
+                    $scope.YearList[index].EmployeeName = $scope.employeeName;
+                    $scope.YearList[index].YearTotal = $scope.yearTotal;
+                    $uibModalInstance.dismiss('cancel');
+
+                },
+                function (response) {
+                    console.log("Error occured while trying to save the entry amendments");
+                }
+            )
+
+        }
+
+
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss('cancel');
+        };
+
+    });
 
 ngSpaApp.controller('ngQuickAddNewEntryModalController',
     function ($scope, $uibModalInstance, ngSpaAppService, $http) {
@@ -89,13 +150,19 @@ ngSpaApp.controller('ngQuickAddNewEntryModalController',
             ngSpaAppService
                 .quickAddNewEntry($scope.jsonObjectForNewEmployeeModel, $scope.selectedYear)
                 .then(function (response) {
-                    $scope.load();
+                    $scope.load($scope.selectedYear);
                     console.log("it is done");
                     $uibModalInstance.dismiss('cancel');
                 })
 
             console.log($scope.jsonObjectForNewEmployeeModel);
         }
+
+
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss('cancel');
+        };
+
     });
 
 
