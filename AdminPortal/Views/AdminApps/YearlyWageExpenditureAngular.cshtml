@@ -37,6 +37,7 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
+                                    <th>Year Id</th>
                                     <th>Year</th>
                                     <th>Employee Id</th>
                                     <th>Employee Name</th>
@@ -46,6 +47,7 @@
                             </thead>
                             <tbody>
                                 <tr ng-repeat="entry in YearList">
+                                    <td>{{entry.YearId}}</td>
                                     <td>{{entry.BusinessYear}}</td>
                                     <td>{{entry.EmployeeId}}</td>
                                     <td>{{entry.EmployeeName}}</td>
