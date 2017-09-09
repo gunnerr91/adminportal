@@ -404,7 +404,7 @@
                 data: JSON.stringify({ "YearId": $('#YearId').val(), "EmployeeName": $('#EmployeeName').val(), "YearTotal": $('#YearTotal').val() }),
                 success: function () {
                     $('#editEntryModal').modal('hide');
-                    loadTable();
+                    loadTable(2017);
                 },
                 error: function (data, statusCode) {
                     console.log("unable to perform action, error: " + statusCode + "\ndata" + data);
@@ -421,7 +421,7 @@
                 contentType: "application/json",
                 success: function (data) {
                     $("#deleteEntryModal").modal("hide");
-                    loadPage();
+                    loadTable(2017);
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     console.log("Error, couldn't delete(xhr,errorThrown,textStatus) " + xhr + "," + errorThrown + "," + textStatus);
@@ -457,7 +457,7 @@
                 data: JSON.stringify(passData),
                 success: function (data) {
                     $("#quickAddNewEmployee").modal("hide");
-                    loadPage();
+                    loadTable(2017);
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     console.log("Error, couldn't delete(xhr,errorThrown,textStatus) " + xhr + "," + errorThrown + "," + textStatus);
@@ -489,7 +489,7 @@
                 data: JSON.stringify(passData),
                 success: function (data) {
                     $("#quickAddNewEntry").modal("hide");
-                    loadPage();
+                    loadTable(2017);
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     console.log("Error, couldn't delete(xhr,errorThrown,textStatus) " + xhr + "," + errorThrown + "," + textStatus);
